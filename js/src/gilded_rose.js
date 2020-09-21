@@ -1,8 +1,12 @@
 function Item(name, sell_in, quality) {
   this.name = name;
+  // number of days to sell the item
   this.sell_in = sell_in;
+  // how valuable the item is
   this.quality = quality;
 }
+
+// aged brie increases in quality the old it gets
 
 var items = []
 
@@ -52,4 +56,9 @@ function update_quality() {
       }
     }
   }
+}
+
+export {
+  Item,
+  update_quality
 }
