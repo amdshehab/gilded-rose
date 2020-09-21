@@ -8,9 +8,9 @@ function Item(name, sell_in, quality) {
 
 // aged brie increases in quality the old it gets
 
-var items = []
+// var items = []
 
-function update_quality() {
+function updateQuality(items) {
   for (var i = 0; i < items.length; i++) {
     if (items[i].name != 'Aged Brie' && items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
       if (items[i].quality > 0) {
@@ -60,5 +60,5 @@ function update_quality() {
 
 export {
   Item,
-  update_quality
+  updateQuality
 }
