@@ -63,4 +63,13 @@ describe("Gilded Rose", function () {
     }])
   })
 
+  it("shouldn't update anything for Sulfuras", () => {
+    const items = [new Item("Sulfuras", 5, 5)];
+    expect(updateQuality(items)).toMatchObject([{
+      name: "Sulfuras",
+      sell_in: 5,
+      quality: 5
+    }])
+  })
+
 });

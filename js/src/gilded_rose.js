@@ -27,6 +27,8 @@ const decrementQuality = (quality, amount = 1) => {
 }
 
 const handleQualityUpdate = (name, quality, sell_in) => {
+
+  if (name === 'Sulfuras') return quality
   if (name === 'Aged Brie') {
     return sell_in >= 0 ? incrementQuality(quality) : incrementQuality(quality, 2)
   }
@@ -38,11 +40,16 @@ const handleQualityUpdate = (name, quality, sell_in) => {
   }
 }
 
+const handleSellInUpdate = (name, sell_in) => {
+  if (name === "Sulfuras") return sell_in
+  return sell_in - 1
+}
+
 function updateQuality(items) {
 
   const updatedItems = items.map(({ name, quality, sell_in }) => ({
     name,
-    sell_in: sell_in - 1,
+    sell_in: handleSellInUpdate(name, sell_in),
     quality: handleQualityUpdate(name, quality, sell_in)
   }))
 
