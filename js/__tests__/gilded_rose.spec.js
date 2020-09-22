@@ -28,11 +28,38 @@ describe("Gilded Rose", function () {
   })
 
   it("shouldn't degrade quality beyond 0", () => {
-    const items = [new Item("foo", -1, 0)];
+    const items = [new Item("foo", -1, 1)];
     expect(updateQuality(items)).toMatchObject([{
       name: "foo",
       sell_in: -2,
       quality: 0
+    }])
+  })
+
+  it('should increment quality for Aged Brie', () => {
+    const items = [new Item("Aged Brie", 4, 3)];
+    expect(updateQuality(items)).toMatchObject([{
+      name: "Aged Brie",
+      sell_in: 3,
+      quality: 4
+    }])
+  })
+
+  it('should increment quality twice as fact for Aged Brie - sellIn expired', () => {
+    const items = [new Item("Aged Brie", -1, 4)];
+    expect(updateQuality(items)).toMatchObject([{
+      name: "Aged Brie",
+      sell_in: -2,
+      quality: 6
+    }])
+  })
+
+  it("Quality shouldn't increment beyond 50", () => {
+    const items = [new Item("Aged Brie", -1, 49)];
+    expect(updateQuality(items)).toMatchObject([{
+      name: "Aged Brie",
+      sell_in: -2,
+      quality: 50
     }])
   })
 

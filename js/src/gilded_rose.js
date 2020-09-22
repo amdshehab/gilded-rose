@@ -4,16 +4,46 @@ function Item(name, sell_in, quality) {
   this.quality = quality;
 }
 
-// aged brie increases in quality the old it gets
+const incrementQuality = (quality, amount = 1) => {
+  if (quality < 50) {
+    if (amount + quality > 50) {
+      return 50
+    } else {
+      return amount + quality
+    }
+  }
+  return quality
+}
 
-const decrementQuality = (quality, amount = 1) => quality - amount >= 0 ? quality - amount : quality
+const decrementQuality = (quality, amount = 1) => {
+  if (quality > 0) {
+    if (quality - amount < 0) {
+      return 0
+    } else {
+      return quality - amount
+    }
+  }
+  return quality
+}
+
+const handleQualityUpdate = (name, quality, sell_in) => {
+  if (name === 'Aged Brie') {
+    return sell_in >= 0 ? incrementQuality(quality) : incrementQuality(quality, 2)
+  }
+
+  if (sell_in >= 0) {
+    return decrementQuality(quality)
+  } else {
+    return decrementQuality(quality, 2)
+  }
+}
 
 function updateQuality(items) {
 
   const updatedItems = items.map(({ name, quality, sell_in }) => ({
     name,
     sell_in: sell_in - 1,
-    quality: sell_in >= 0 ? decrementQuality(quality) : decrementQuality(quality, 2)
+    quality: handleQualityUpdate(name, quality, sell_in)
   }))
 
   return updatedItems
