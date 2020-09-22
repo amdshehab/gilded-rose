@@ -26,6 +26,8 @@ const decrementQuality = (quality, amount = 1) => {
   return quality
 }
 
+const isConjured = (name) => name.split(' ')[0] === 'Conjured'
+
 const handleQualityUpdate = (name, quality, sell_in) => {
 
   if (name === 'Sulfuras, Hand of Ragnaros') return quality
@@ -43,6 +45,14 @@ const handleQualityUpdate = (name, quality, sell_in) => {
 
   if (name === 'Aged Brie') {
     return sell_in >= 0 ? incrementQuality(quality) : incrementQuality(quality, 2)
+  }
+
+  if (isConjured(name)) {
+    if (sell_in >= 0) {
+      return decrementQuality(quality, 2)
+    } else {
+      return decrementQuality(quality, 4)
+    }
   }
 
   if (sell_in >= 0) {
@@ -70,3 +80,6 @@ export {
   Item,
   updateQuality
 }
+
+window.Item = Item
+window.updateQuality = updateQuality

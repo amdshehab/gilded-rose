@@ -112,5 +112,23 @@ describe("Gilded Rose", function () {
     })
   })
 
+  describe("Conjured items", () => {
+    it("should degrade twice as fast - SellIn > 0", () => {
+      const items = [new Item("Conjured Mana Cake", 12, 5)];
+      expect(updateQuality(items)).toMatchObject([{
+        name: "Conjured Mana Cake",
+        sell_in: 11,
+        quality: 3
+      }])
+    })
 
+    it("should degrade quality twice as fast when sell_in is less than 0", () => {
+      const items = [new Item("Conjured Health Potion", -1, 5)];
+      expect(updateQuality(items)).toMatchObject([{
+        name: "Conjured Health Potion",
+        sell_in: -2,
+        quality: 1
+      }])
+    })
+  })
 });
