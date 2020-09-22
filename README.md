@@ -32,7 +32,7 @@ yarn start
 
 5. I then tackled all the other special cases for different items with TDD. I'd already built up some reusable functions to handle incrementation/decrementation, so that made handling different scenarios straight forward.
 
-6. I then added the requested feature; I realised `Conjured` is not just a specific item but a prefix for item names, so I built a small function to check for that prefix and then handled it updates accordingly
+6. I then added the requested feature; I realised `Conjured` is not just a specific item but a prefix for item names, so I built a small function to check for that prefix and then handled its updates accordingly
 
 7. I set up a small server to serve the HTML demo, this is because I'm using es6 modules and had to change the script type to `module`
 
